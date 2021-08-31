@@ -381,11 +381,12 @@ void client_write(client_t client, const char* text) {
     clientStreams[client]->write((const uint8_t*)text, strlen(text));
 }
 
-void ClientStream::add(char c) {
+size_t ClientStream::write(uint8_t value) {
     char text[2];
     text[1] = '\0';
-    text[0] = c;
+    text[0] = char(value);
     client_write(_client, text);
+    return 1;
 }
 
 ClientStream::ClientStream(const char* filename, const char* defaultFs) : _client(CLIENT_FILE) {

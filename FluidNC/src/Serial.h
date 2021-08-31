@@ -93,7 +93,9 @@ public:
     ClientStream(client_t client) : _client(client) {}
     ClientStream(const char* filename, const char* defaultFs);
 
-    void add(char c) override;
+    size_t write(uint8_t value) override;
+    void flush() override {}
+
     ~ClientStream();
 };
 

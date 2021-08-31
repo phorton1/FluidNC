@@ -7,64 +7,28 @@
 #include "Pin.h"
 
 #include <cstring>
+#include <Stream.h>
 
-class SimpleOutputStream {
-    static char* intToBuf(int value, char* dst);
-    static char* uintToBuf(unsigned int value, char* dst);
-
+class SimpleOutputStream : public Stream {
 public:
     SimpleOutputStream() = default;
 
-    SimpleOutputStream(const SimpleOutputStream& o) = delete;
-    SimpleOutputStream(SimpleOutputStream&& o)      = delete;
+    // SimpleOutputStream is not for Input; these are inherited without implementation:
+    virtual int available() { return 0; }
+    virtual int read() { return 0; }
+    virtual int peek() { return 0; }
 
-    SimpleOutputStream& operator=(const SimpleOutputStream& o) = delete;
-    SimpleOutputStream& operator=(SimpleOutputStream&& o) = delete;
-
-    virtual void add(char c) = 0;
-    virtual void flush() {}
-
-    void add(const char* s);
-    void add(int value);
-    void add(unsigned int value);
-    void add(float value, int numberDigits, int precision);
-    void add(StringRange range);
-    void add(const Pin& pin);
+    // Output methods are inherited from Stream:
+    // virtual void flush() = 0;
+    // virtual size_t write(uint8_t value) = 0;
 
     virtual ~SimpleOutputStream() {}
 };
 
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, char c) {
-    lhs.add(c);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, const char* v) {
-    lhs.add(v);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, int v) {
-    lhs.add(v);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, unsigned int v) {
-    lhs.add(v);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, float v) {
-    lhs.add(v, 4, 3);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, StringRange v) {
-    lhs.add(v);
-    return lhs;
-}
-
-inline SimpleOutputStream& operator<<(SimpleOutputStream& lhs, const Pin& v) {
-    lhs.add(v);
-    return lhs;
-}
+Print& operator<<(Print& lhs, char c);
+Print& operator<<(Print& lhs, const char* s);
+Print& operator<<(Print& lhs, int value);
+Print& operator<<(Print& lhs, unsigned int value);
+Print& operator<<(Print& lhs, float value);
+Print& operator<<(Print& lhs, StringRange range);
+Print& operator<<(Print& lhs, const Pin& pin);

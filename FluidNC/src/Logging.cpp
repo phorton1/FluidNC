@@ -15,8 +15,9 @@ bool atMsgLevel(MsgLevel level) {
 DebugStream::DebugStream(const char* name) {
     std::cout << "[MSG:" << name << ": ";
 }
-void DebugStream::add(char c) {
-    std::cout << c;
+size_t DebugStream::write(uint8_t c) {
+    std::cout << char(c);
+    return 1;
 }
 
 DebugStream::~DebugStream() {
@@ -38,11 +39,12 @@ DebugStream::DebugStream(const char* name) {
     client_write(LOG_CLIENT, ": ");
 }
 
-void DebugStream::add(char c) {
+size_t DebugStream::write(uint8_t c) {
     char txt[2];
-    txt[0] = c;
+    txt[0] = char(c);
     txt[1] = '\0';
     client_write(LOG_CLIENT, txt);
+    return 1;
 }
 
 DebugStream::~DebugStream() {

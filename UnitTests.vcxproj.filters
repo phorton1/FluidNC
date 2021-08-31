@@ -893,7 +893,6 @@
     <ClCompile Include="X86TestSupport\soc\ledc_struct.cpp">
       <Filter>X86TestSupport\soc</Filter>
     </ClCompile>
-    <ClCompile Include="X86TestSupport\driver\rmt.cpp" />
     <ClCompile Include="X86TestSupport\esp32-hal-timer.cpp">
       <Filter>X86TestSupport</Filter>
     </ClCompile>
@@ -902,6 +901,9 @@
     </ClCompile>
     <ClCompile Include="Grbl_Esp32\src\Motors\MotorDriver.cpp">
       <Filter>src\Motors</Filter>
+    </ClCompile>
+    <ClCompile Include="X86TestSupport\driver\rmt.cpp">
+      <Filter>X86TestSupport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,16 +3,19 @@
 
 #pragma once
 
-#include "SimpleOutputStream.h"
 #include "StringRange.h"
+#include "SimpleOutputStream.h"
 
+#include <Print.h>
 #include <vector>
 
-class StringStream : public SimpleOutputStream {
+class StringStream : public Print {
     std::vector<char> data_;
 
 public:
-    void add(char c) override { data_.push_back(c); }
-
+    size_t write(uint8_t value) override {
+        data_.push_back(char(value));
+        return 1;
+    }
     StringRange str() const { return StringRange(data_.data(), data_.data() + data_.size()); }
 };

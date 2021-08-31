@@ -32,7 +32,8 @@ enum MsgLevel {
 class DebugStream : public SimpleOutputStream {
 public:
     DebugStream(const char* name);
-    void add(char c) override;
+    void   flush()              override {}
+    size_t write(uint8_t value) override;
     ~DebugStream();
 };
 
