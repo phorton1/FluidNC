@@ -29,6 +29,7 @@ public:
     void group(Configuration::HandlerBase& handler) override;
 
     bool system_check_safety_door_ajar();
+    bool startup_validation();
     void report(char* status);
 
     ~Control() = default;

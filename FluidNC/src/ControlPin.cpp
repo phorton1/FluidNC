@@ -6,9 +6,14 @@
 #include <esp32-hal-gpio.h>  // CHANGE
 
 void IRAM_ATTR ControlPin::handleISR() {
+    read();
+}
+
+void ControlPin::read() {
     bool pinState = _pin.read();
     _value        = pinState;
-    _rtVariable   = pinState;
+    if (_value)
+        _rtVariable = pinState;  // only set it true, the main loop will clear it
 }
 
 void ControlPin::init() {
@@ -20,6 +25,7 @@ void ControlPin::init() {
     if (_pin.capabilities().has(Pins::PinCapabilities::PullUp)) {
         attr = attr | Pin::Attr::PullUp;
     }
+    read();
     _pin.setAttr(attr);
     _pin.attachInterrupt<ControlPin, &ControlPin::handleISR>(this, CHANGE);
 }

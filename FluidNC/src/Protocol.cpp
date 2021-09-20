@@ -122,6 +122,11 @@ void protocol_main_loop() {
             }
         }
 
+        if (! config->_control->startup_validation()) {
+            sys.state = State::Alarm;
+            report_feedback_message(Message::CheckInputs);
+        }
+
         if (sys.state == State::Alarm || sys.state == State::Sleep) {
             report_feedback_message(Message::AlarmLock);
             sys.state = State::Alarm;  // Ensure alarm state is set.
@@ -699,7 +704,7 @@ void protocol_exec_rt_system() {
         protocol_do_macro(1);
     }
     if (rtButtonMacro2) {
-        rtButtonMacro0 = false;
+        rtButtonMacro2 = false;
         protocol_do_macro(2);
     }
     if (rtButtonMacro3) {

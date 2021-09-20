@@ -10,7 +10,8 @@ private:
     const char*    _legend;
 
     void handleISR();
-
+    void read();
+    
 public:
     ControlPin(volatile bool& rtVariable, const char* legend, char letter) :
         _value(false), _letter(letter), _rtVariable(rtVariable), _legend(legend) {
@@ -21,6 +22,7 @@ public:
 
     void init();
     bool get() { return _value; }
+    
 
     void report(char* status);
 

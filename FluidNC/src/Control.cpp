@@ -50,3 +50,30 @@ bool Control::system_check_safety_door_ajar() {
     // never be changed for an undefined pin.
     return _safetyDoor.get();
 }
+
+bool Control::startup_validation() {
+    bool valid = true;
+
+    if (_macro0.get()) {
+        rtButtonMacro0 = false;
+        valid = false;
+    }
+
+        if (_macro1.get()) {
+        rtButtonMacro2 = false;
+        valid = false;
+    }
+
+        if (_macro2.get()) {
+        rtButtonMacro2 = 0;
+        valid = false;
+    }
+
+        if (_macro3.get()) {
+        rtButtonMacro3 = false;
+        valid = false;
+    }
+
+    return valid;
+
+}

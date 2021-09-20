@@ -196,6 +196,10 @@ static Error disable_alarm_lock(const char* value, WebUI::AuthenticationLevel au
     if (sys.state == State::ConfigAlarm) {
         return Error::ConfigurationInvalid;
     } else if (sys.state == State::Alarm) {
+        if (!config->_control->startup_validation()) {
+            report_feedback_message(Message::CheckInputs);
+            return Error::CheckInputs;
+        }
         // Block if safety door is ajar.
         if (config->_control->system_check_safety_door_ajar()) {
             return Error::CheckDoor;
