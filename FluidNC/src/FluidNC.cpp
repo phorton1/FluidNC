@@ -44,6 +44,10 @@ void main_init() {
         // because the polling may depend on the config
         client_init();
 
+        if (!SPIFFS.begin(true)) {
+            log_error("Cannot mount the local filesystem");
+        }
+
         display_init();
 
         // Load settings from non-volatile storage
@@ -51,10 +55,6 @@ void main_init() {
 
         log_info("FluidNC " << GIT_TAG << GIT_REV);
         log_info("Compiled with ESP32 SDK:" << ESP.getSdkVersion());
-
-        if (!SPIFFS.begin(true)) {
-            log_error("Cannot mount the local filesystem");
-        }
 
         bool configOkay = config->load(config_filename->get());
         make_user_commands();
