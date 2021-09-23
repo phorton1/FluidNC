@@ -2,7 +2,7 @@
 // Copyright (c) 2018 -	Bart Dring
 // Use of this source code is governed by a GPLv3 license that can be found in the LICENSE file.
 
-#include "Main.h"
+#include "FluidNC.h"
 #include "Machine/MachineConfig.h"
 
 #include "Config.h"
@@ -28,7 +28,7 @@
 
 extern void make_user_commands();
 
-void setup() {
+void main_init() {
     try {
         uartInit();  // Setup serial port
 
@@ -165,7 +165,7 @@ static void reset_variables() {
     mc_init();
 }
 
-void loop() {
+void run_once() {
     static int tries = 0;
     try {
         reset_variables();
