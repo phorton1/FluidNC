@@ -326,7 +326,7 @@ GCUpdatePos mc_probe_cycle(float* target, plan_line_data_t* pl_data, uint8_t par
         return GCUpdatePos::None;  // Nothing else to do but bail.
     }
     // Setup and queue probing motion. Auto cycle-start should not start the cycle.
-    log_info("Found");
+    // log_info("Found");
     cartesian_to_motors(target, pl_data, gc_state.position);
     // Activate the probing state monitor in the stepper module.
     probeState = ProbeState::Active;
