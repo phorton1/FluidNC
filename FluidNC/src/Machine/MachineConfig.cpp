@@ -227,16 +227,10 @@ namespace Machine {
             Configuration::Parser        parser(input->begin(), input->end());
             Configuration::ParserHandler handler(parser);
 
-            // instance() is by reference, so we can just get rid of an old instance and
-            // create a new one here:
-            {
-                auto& machineConfig = instance();
-                if (machineConfig != nullptr) {
-                    delete machineConfig;
-                }
-                machineConfig = new MachineConfig();
-            }
-            config = instance();
+            // instaniate base class config is no pointer present
+
+            if (!config)
+                config = new MachineConfig();
 
             handler.enterSection("machine", config);
 
