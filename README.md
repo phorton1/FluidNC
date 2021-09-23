@@ -2,6 +2,11 @@
 
 # FluidNC (CNC Controller) For ESP32
 
+Please see the [inner FluidNC folder](FluidNC/readme.md) for details on how to
+use this fork and branch of the project to create *extensable CNC machines* in
+the **Arduino IDE** development environment
+
+
 <img src="https://user-images.githubusercontent.com/189677/93836185-74c27500-fc47-11ea-8bed-5d419974c196.jpg" width="600">
 
 ## Introduction
@@ -65,7 +70,7 @@ coolant:
 
 ## Tuning
 
-Many parameters like accelerations and speeds need to be tuned when setting up a new machine. These values are in the YAML file like everything else, but you can also temporarily change them by sending the YAML hierarchy for that setting as a $ command. Sending $axes/x/acceleration=50 would change the acceleration of the x axis to 50. 
+Many parameters like accelerations and speeds need to be tuned when setting up a new machine. These values are in the YAML file like everything else, but you can also temporarily change them by sending the YAML hierarchy for that setting as a $ command. Sending $axes/x/acceleration=50 would change the acceleration of the x axis to 50.
 
 The changes are temporary. To make them permanent you would edit the YAML file. You can also save the all of the current changes to the YAML with the $CD=<your YAML file name>
 
@@ -92,7 +97,7 @@ ok
 
 ## Spindles
 
-FluidNC supports multiple spindles on one machine.  Spindles can be controlled by different hardware interfaces like relays, PWM, DACs, or RS485 serial interfaces to VFDs.  Lasers are treated as spindles. Each spindle is assigned a range of tool numbers. You change spindles by issuing the GCode command "M6 Tn", where n is the tool number.  Tool numbers within the assigned range for a given spindle will activate that spindle - and the detailed number within the range could be used to select the specific tool on the spindle.  This lets you have, for example, a single machine with an ATC spindle and a laser. A single GCode file could allow you to etch and cutout a part. Most CAM programs support tool numbers. You could also have a gantry with both a low-speed high-torque pulley spindle and also a high-speed direct drive spindle. 
+FluidNC supports multiple spindles on one machine.  Spindles can be controlled by different hardware interfaces like relays, PWM, DACs, or RS485 serial interfaces to VFDs.  Lasers are treated as spindles. Each spindle is assigned a range of tool numbers. You change spindles by issuing the GCode command "M6 Tn", where n is the tool number.  Tool numbers within the assigned range for a given spindle will activate that spindle - and the detailed number within the range could be used to select the specific tool on the spindle.  This lets you have, for example, a single machine with an ATC spindle and a laser. A single GCode file could allow you to etch and cutout a part. Most CAM programs support tool numbers. You could also have a gantry with both a low-speed high-torque pulley spindle and also a high-speed direct drive spindle.
 
 ## Motors
 
@@ -142,7 +147,7 @@ FluidNC includes a built-in brower-based Web UI (Esp32_WebUI) so you control the
 
 The original [Grbl](https://github.com/gnea/grbl) is an awesome project by Sungeon (Sonny) Jeon. I have known him for many years and he is always very helpful. I have used Grbl on many projects.
 
-The Wifi and WebUI is based on [this project.](https://github.com/luc-github/ESP3D-WEBUI)  
+The Wifi and WebUI is based on [this project.](https://github.com/luc-github/ESP3D-WEBUI)
 
 Mitch Bradley designed and implemented the $name=value settings mechanism.  The YAML-format runtime configuration mechanism was spearheaded Mitch Bradley, and designed and implemented by Mitch and Stefan de Bruin.  Stefan's mastery of C++ is especially evident in the Class architecture of the configuration mechanism.
 
