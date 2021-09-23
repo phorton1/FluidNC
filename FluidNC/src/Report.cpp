@@ -23,7 +23,7 @@
 #include "Machine/MachineConfig.h"
 #include "SettingsDefinitions.h"
 #include "MotionControl.h"               // probe_succeeded
-#include "Limits.h"                      // limits_get_state
+#include "GLimits.h"                      // limits_get_state
 #include "Planner.h"                     // plan_get_block_buffer_available
 #include "Stepper.h"                     // step_count
 #include "WebUI/NotificationsService.h"  // WebUI::notificationsservice

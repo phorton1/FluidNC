@@ -9,7 +9,7 @@
 #include "Report.h"
 #include "Settings.h"
 #include "SettingsDefinitions.h"
-#include "Limits.h"
+#include "GLimits.h"
 #include "Protocol.h"
 #include "System.h"
 #include "Uart.h"
