@@ -24,6 +24,10 @@
 #include <cstring>
 #include <map>
 
+#include "Platform.h"
+Error WEAK_LINK saveYamlOverride(const char *path, const char *value)   { return Error::Ok; }
+void WEAK_LINK clearYamlOverrides() {}
+
 // WG Readable and writable as guest
 // WU Readable and writable as user and admin
 // WA Readable as user and admin, writable as admin
@@ -71,6 +75,7 @@ void settings_restore(uint8_t restore_flag) {
                 }
             }
         }
+        clearYamlOverrides();
         log_info("Settings reset done");
     }
     if (restore_flag & SettingsRestore::Parameters) {
@@ -575,7 +580,8 @@ Error do_command_or_setting(const char* key, char* value, WebUI::AuthenticationL
             Configuration::AfterParse afterParseHandler;
             config->afterParse();
             config->group(afterParseHandler);
-
+            if (value)
+                return saveYamlOverride(key,value);
             return Error::Ok;
         }
     } catch (const Configuration::ParseException& ex) {

@@ -23,6 +23,9 @@
 #include <cstring>
 #include <atomic>
 
+#include "../Platform.h"
+void WEAK_LINK loadYamlOverrides()    {}
+
 Machine::MachineConfig* config;
 
 // TODO FIXME: Split this file up into several files, perhaps put it in some folder and namespace Machine?
@@ -231,6 +234,8 @@ namespace Machine {
 
             if (!config)
                 config = new MachineConfig();
+
+            loadYamlOverrides();
 
             handler.enterSection("machine", config);
 
