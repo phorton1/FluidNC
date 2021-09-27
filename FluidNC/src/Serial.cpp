@@ -264,7 +264,7 @@ InputClient* pollClients() {
             }
             if (ch == '\r' || ch == '\n') {
                 client->_line_num++;
-                if (config->_sdCard->get_state() < SDCard::State::Busy) {
+                if (config->_sdCard->get_state() < SDState::Busy) {
                     client->_line[client->_linelen] = '\0';
                     client->_line_returned          = true;
                     return client;
