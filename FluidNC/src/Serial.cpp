@@ -77,6 +77,11 @@ void heapCheckTask(void* pvParameters) {
     }
 }
 
+
+#include "Platform.h"
+void WEAK_LINK user_realtime_command(uint8_t command, Print &client)  {}
+
+
 // Act upon a realtime character
 void execute_realtime_command(Cmd command, Print& client) {
     switch (command) {
@@ -181,6 +186,9 @@ void execute_realtime_command(Cmd command, Print& client) {
         case Cmd::CoolantMistOvrToggle:
             rtAccessoryOverride.bit.coolantMistOvrToggle = 1;
             break;
+        default:
+            user_realtime_command((uint8_t)command,client);
+            break;
     }
 }
 
@@ -189,6 +197,22 @@ bool is_realtime_command(uint8_t data) {
     if (data >= 0x80) {
         return true;
     }
+
+    // allow user_realtime_commands() in the 0x00..0x1f range
+    // many keyboards do not support old IBM alt-keycodes
+    // and there *should* be a way to do everything over
+    // a terminal window, though you cannot do most of the
+    // extended FluidNC realtime commands that way at this time
+
+    if (data < 0x20 &&
+        data != 0x08 &&     // tab
+        data != 0x09 &&     // backspace
+        data != 0x0A &&     // lf
+        data != 0x0D )      // cr
+    {
+        return true;
+    }
+
     auto cmd = static_cast<Cmd>(data);
     return cmd == Cmd::Reset || cmd == Cmd::StatusReport || cmd == Cmd::CycleStart || cmd == Cmd::FeedHold;
 }
