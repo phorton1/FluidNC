@@ -111,10 +111,12 @@ This repository is a denormalized copy of the **inner FluidNC** folder of
  [**my fork**](https://github.com/phorton1/FluidNC)
 of the **bdring/FluidNC** project.
 
-Please also see my [**FluidNC_UI**](https://github.com/phorton1/Arduino-libraries-FluidNC_UI)
-library that provides a *TFT touchscreen User Interface* to FluidNC and my
-[**extensions**](https://github.com/phorton1/Arduino-libraries-FluidNC_extensions)
-to the FluidNC library
+
+- [**FluidNC_UI**](https://github.com/phorton1/Arduino-libraries-FluidNC_UI) - a *touch screen user interface* for FluidNC
+- [**FluidNC_extensions**](https://github.com/phorton1/Arduino-libraries-FluidNC_extensions) - a number of *extensions* to FluidNC
+- [**CNC3018_ESP32**](https://github.com/phorton1/Arduino-CNC3018_ESP) - an implementation of an inexpensive 3-axis **3018** cnc machine using this code
+- the [**vMachine**](https://github.com/phorton1/Arduino-_vMachine) - a *Maslow-like* **vPlotter** cnc machine using this code
+
 
 
 <br>
@@ -127,4 +129,3 @@ This library is licensed undere the
 **Credits**
 
 - To **bdring** and the [FluidNC Team](https://github.com/bdring/FluidNC) for the core of this project.
-
