@@ -6,8 +6,8 @@ Please see the [inner FluidNC folder](FluidNC/readme.md) for details on how to
 use this fork and branch of the project to create *extensable CNC machines* in
 the **Arduino IDE** development environment
 
-
 <img src="https://user-images.githubusercontent.com/189677/93836185-74c27500-fc47-11ea-8bed-5d419974c196.jpg" width="600">
+
 
 ## Introduction
 
