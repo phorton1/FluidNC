@@ -5,11 +5,13 @@
 #pragma once
 #ifdef ESP32
 
-#    include "PinDetail.h"
+#include "PinDetail.h"
+#include <esp_attr.h>        // IRAM_ATTR
+
 
 namespace Pins
 {
-    class SerInPinDetail : public PinDetail
+    class I2SIPinDetail : public PinDetail
     {
         PinCapabilities _capabilities;
         PinAttributes   _attributes;
@@ -20,7 +22,7 @@ namespace Pins
 
     public:
 
-        SerInPinDetail(pinnum_t index, const PinOptionsParser& options);
+        I2SIPinDetail(pinnum_t index, const PinOptionsParser& options);
 
         PinCapabilities capabilities() const override;
         PinAttributes getAttr() const override  { return _attributes; }
@@ -32,13 +34,12 @@ namespace Pins
 
         void attachInterrupt(void (*callback)(void*), void* arg, int mode) override;
         void detachInterrupt() override;
-        void doFakeInterrupt()   { m_callback(m_cb_arg); }
+        void IRAM_ATTR doInterrupt()   { m_callback(m_cb_arg); }
 
         String toString() override;
 
-        ~SerInPinDetail() override
-        {
-        }
+        ~I2SIPinDetail() override {}
+
     };
 }
 
